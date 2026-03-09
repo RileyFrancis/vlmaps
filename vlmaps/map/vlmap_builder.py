@@ -247,7 +247,7 @@ class VLMapBuilder:
             checkpoint_url = "https://drive.google.com/u/0/uc?id=1ayk6NXURI_vIPlym16f_RG3ffxBWHxvb"
             gdown.download(checkpoint_url, output=str(checkpoint_path))
 
-        pretrained_state_dict = torch.load(checkpoint_path, map_location=self.device)
+        pretrained_state_dict = torch.load(checkpoint_path, map_location=self.device, weights_only=False)
         pretrained_state_dict = {k.lstrip("net."): v for k, v in pretrained_state_dict["state_dict"].items()}
         model_state_dict.update(pretrained_state_dict)
         lseg_model.load_state_dict(pretrained_state_dict)

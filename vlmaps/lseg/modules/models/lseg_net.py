@@ -320,7 +320,7 @@ class LSegEnc(BaseModel):
         
         pixel_encoding = self.logit_scale * image_features.half() 
         
-        logits_per_image = pixel_encoding @ text_features.t()
+        logits_per_image = pixel_encoding @ text_features.half().t()
         pixel_encoding = pixel_encoding.float().view(imshape[0], imshape[2], imshape[3], -1).permute(0,3,1,2)
 
         out = logits_per_image.float().view(imshape[0], imshape[2], imshape[3], -1).permute(0,3,1,2)

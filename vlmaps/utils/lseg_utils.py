@@ -80,7 +80,7 @@ def get_lseg_feat(
                 pad_crop_img = pad_image(crop_img, norm_mean, norm_std, crop_size)
                 with torch.no_grad():
                     # output = model(pad_crop_img)
-                    output, logits = model(pad_crop_img, labels)
+                    output, logits = model(pad_crop_img.float(), labels)
                 cropped = crop_image(output, 0, h1 - h0, 0, w1 - w0)
                 cropped_logits = crop_image(logits, 0, h1 - h0, 0, w1 - w0)
                 outputs[:, :, h0:h1, w0:w1] += cropped
